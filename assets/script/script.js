@@ -15,11 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
   submitForm.addEventListener("submit", function (event) {
     event.preventDefault();
     tambahBuku();
+    reset();
   });
   if (isStorageExist()) {
     loadDataFromStorage();
   }
 });
+
+function reset() {
+  document.getElementById("judul").value = "";
+  document.getElementById("penulis").value = "";
+  document.getElementById("tahun").value = "";
+}
 
 function tambahBuku() {
   const judulBuku = document.getElementById("judul").value;
@@ -88,6 +95,10 @@ function buatBuku(ObjectBuku) {
   container.append(textContainer);
   container.setAttribute("id", `todo-${ObjectBuku.id}`);
 
+  const buttonContainer = document.createElement("div");
+  container.classList.add("button-container");
+  container.append(buttonContainer);
+
   if (ObjectBuku.isCompleted) {
     const undoButton = document.createElement("button");
     undoButton.classList.add("undo-button");
@@ -103,7 +114,14 @@ function buatBuku(ObjectBuku) {
       hapusBuku(ObjectBuku.id);
     });
 
-    container.append(undoButton, trashButton);
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+
+    editButton.addEventListener("click", function () {
+      editBuku(ObjectBuku.id);
+    });
+
+    buttonContainer.append(editButton, undoButton, trashButton);
   } else {
     const checkButton = document.createElement("button");
     checkButton.classList.add("check-button");
@@ -111,14 +129,20 @@ function buatBuku(ObjectBuku) {
     const trashButton = document.createElement("button");
     trashButton.classList.add("trash-button");
 
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+
     trashButton.addEventListener("click", function () {
       hapusBuku(ObjectBuku.id);
     });
     checkButton.addEventListener("click", function () {
       bukuSelesai(ObjectBuku.id);
     });
+    editButton.addEventListener("click", function () {
+      editBuku(ObjectBuku.id);
+    });
 
-    container.append(checkButton, trashButton);
+    buttonContainer.append(editButton, checkButton, trashButton);
   }
 
   return container;
@@ -173,11 +197,58 @@ function temukanIndeksBuku(id) {
   return -1;
 }
 
+function editBuku(id) {
+  const targetBuku = temukanBuku(id);
+
+  if (targetBuku == null) return;
+  document.getElementById("input").style.visibility = "visible";
+  document.getElementById("judul").value = targetBuku.judul;
+  document.getElementById("penulis").value = targetBuku.penulis;
+  document.getElementById("tahun").value = targetBuku.tahun;
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  editData(id);
+}
+
+function cariBuku() {
+  const cari = document.getElementById("cari").value;
+  const bukuBelumSelesai = document.getElementById("uncompleted-book");
+  bukuBelumSelesai.innerHTML = "";
+
+  const bukuSelesai = document.getElementById("completed-book");
+  bukuSelesai.innerHTML = "";
+
+  for (const bookItem of buku) {
+    const elemenBuku = buatBuku(bookItem);
+    if (bookItem.judul.toLowerCase().includes(cari.toLowerCase())) {
+      if (!bookItem.isCompleted) {
+        bukuBelumSelesai.append(elemenBuku);
+      } else bukuSelesai.append(elemenBuku);
+    }
+  } 
+}
+
 function saveData() {
   if (isStorageExist()) {
     const parsed = JSON.stringify(buku);
     localStorage.setItem(STORAGE_KEY, parsed);
     document.dispatchEvent(new Event(SAVED_EVENT));
+  }
+}
+
+function editData(id) {
+  if (isStorageExist()) {
+    const targetBuku = temukanIndeksBuku(id);
+
+    if (targetBuku === -1) return;
+  
+    buku.splice(targetBuku, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+
+    const parsed = JSON.stringify(buku);
+    localStorage.setItem(STORAGE_KEY, parsed);
+    document.dispatchEvent(new Event(SAVED_EVENT));
+    saveData();
   }
 }
 
