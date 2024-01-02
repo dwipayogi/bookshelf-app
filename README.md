@@ -8,7 +8,8 @@ Bookshelf App is a web application that can be used to store book data read by u
 - Has 2 bookshelves. Namely, "Not finished reading" and "Done reading".
 - Can Move Books between Shelves
 - Delete Book Data
-- Export documents as Markdown, HTML and PDF
+- Edit Book Data
+- Search Book Data by title
 
 ## Tech
 
