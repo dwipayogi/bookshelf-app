@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/style/style.css" />
+    <title>Bookshelf App</title>
+  </head>
+  <body>
+    <header>
+      <h1>BookShelf App</h1>
+    </header>
+    <main>
+      <div class="menu">
+        <button class="blue" onclick="show()">Tambah Buku</button>
+        <input type="text" placeholder="cari buku" disabled/>
+      </div>
+      <section class="not-complete">
+        <h2>Belum Selesai Dibaca</h2>
+        <div class="list-item" id="uncompleted-book"></div>
+      </section>
+      <section class="complete">
+        <h2>Selesai Dibaca</h2>
+        <div class="list-item" id="completed-book"></div>
+      </section>
+    </main>
+    <div id="input">
+      <div class="input-form">
+        <h2>Tambah Buku</h2>
+        <form action="" id="form">
+          <label for="judul">Judul</label>
+          <input type="text" name="judul" id="judul" />
+          <label for="penulis">Penulis</label>
+          <input type="text" name="penulis" id="penulis" />
+          <label for="tahun">Tahun</label>
+          <input type="date" name="tahun" id="tahun" />
+          <div class="button-group">
+            <button onclick="show()" class="red" disabled>Cancel</button>
+            <button type="submit" onclick="show()" class="blue">Tambah</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="/assets/script/script.js"></script>
+  </body>
+</html>

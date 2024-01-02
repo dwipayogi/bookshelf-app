@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
+header {
+  text-align: center;
+  background-color: rgb(0, 110, 255);
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 5% 10% 0 10%;
+}
+h1 {
+  font-size: 40px;
+  font-weight: 700;
+}
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10%;
+}
+button {
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 12px 0;
+}
+.blue {
+  background-color: rgb(0, 110, 255);
+  padding: 8px 32px;
+  border-radius: 8px;
+}
+.red {
+  background-color: rgb(255, 0, 0);
+  padding: 8px 32px;
+  border-radius: 8px;
+}
+.blue:hover {
+  background-color: rgb(0, 80, 185);
+}
+.red:hover {
+  background-color: rgb(179, 0, 0);
+}
+input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgb(0, 110, 255);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 12px 0;
+}
+section {
+  border: 2px solid rgb(0, 110, 255);
+  padding: 24px;
+  border-radius: 8px;
+  margin: 24px 10%;
+}
+h2 {
+  font-size: 32px;
+  min-height: 600;
+  text-align: center;
+}
+#input {
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  backdrop-filter: blur(10px);
+  z-index: 2;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input-form {
+  width: 60%;
+  background-color: white;
+  border: 2px solid rgb(0, 110, 255);
+  padding: 24px;
+  border-radius: 8px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.button-group {
+  margin: auto;
+}
+
+.check-button {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+
+  background: url('/assets/img/bx-checkbox-checked.svg');
+  background-size: contain;
+  margin-left: auto;
+  cursor: pointer;
+  border: none;
+}
+.trash-button {
+  width: 40px;
+  height: 40px;
+  background: url('/assets/img/bx-trash.svg');
+  background-size: contain;
+  margin-left: 16px;
+  cursor: pointer;
+  border: none;
+}
+
+.undo-button {
+  width: 40px;
+  height: 40px;
+  background: url('/assets/img/bx-undo.svg');
+  background-size: contain;
+  margin-left: auto;
+  cursor: pointer;
+  border: none;
+}
+.item {
+  border-radius: 16px;
+  margin-top: 16px;
+  padding: 12px 24px 12px 24px;
+  background: rgb(0, 98, 255);
+  color: white;
+  display: flex;
+  align-items: center;
+  
+}
+h3 {
+  font-size: 28px;
+  font-weight: 600;
+}
+p {
+  font-size: 20px;
+  font-weight: 400;
+}
